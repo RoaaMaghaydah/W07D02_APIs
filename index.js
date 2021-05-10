@@ -44,9 +44,10 @@ app.get("/user/:name", (req, res) => {
 
 // a POST request on endpoint http://localhost:3000/create/user
 app.post("/create/user", (req, res) => {
+
   // the received information are in req.body
   // an example of the sent data would be { "name": "John", "age": 25}
-  const newUser = { name: req.body.name, age: eq.body.age };
+  const newUser = { name: req.body.name, age: req.body.age };
   // same as the above but in ES6
   // const { name, age } = req.body;
 
@@ -64,8 +65,10 @@ app.post("/create/user", (req, res) => {
 });
 
 app.get("/first-user",(req,res)=>{
-    //const user=req.params.name
-    res.json(users.name)   
+    res.json(users[0].name)   
+})
+app.get("/",(req,res)=>{
+res.send("hello word");
 })
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
