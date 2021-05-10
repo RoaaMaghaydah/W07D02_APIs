@@ -29,18 +29,18 @@ const todos = [{ todo: " wake up", isCompleted: false },
       if (found) {
         
         res.status(200);
-        res.json(found);
+        element.todo=`${element.todo}uddate`;
+        res.json(element.todo);
       } else {
-
+        // set the response status code to 404 (Not Found)
         res.status(404);
         res.json("User not found");
       }
     });
 
-     
     
 
- })
+ 
 
 
 
