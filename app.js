@@ -20,6 +20,28 @@ const todos = [{ todo: " wake up", isCompleted: false },
      res.json(newtodo);
  })
 
+ app.put("/update/todo/:todo",(req,res)=>{
+     const todoo=req.params.todo;
+     const found = todos.find((element) => {
+        return element.todo ===todoo;
+      });
+    
+      if (found) {
+        
+        res.status(200);
+        res.json(found);
+      } else {
+
+        res.status(404);
+        res.json("User not found");
+      }
+    });
+
+     
+    
+
+ })
+
 
 
  app.listen(port,()=>
