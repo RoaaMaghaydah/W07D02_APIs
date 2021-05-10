@@ -5,10 +5,10 @@ const port = 5000;
 app.use(express.json());
 
 const todos = [{ todo: "wake up", isCompleted: false },
-{ todo: "Eat Breakfast", isCompleted: true }];
-
+{ todo: "Eat Breakfast", isCompleted: false }];
 
 app.get("/todos", (req, res) => {
+    res.status(201);
     res.json(todos);
 })
 
@@ -21,26 +21,21 @@ app.post("/create/todo", (req, res) => {
 
 app.put("/update/todo/:todo", (req, res) => {
     const todoo = req.params.todo;
-
     todos.find((element, index) => {
-
         if (element.todo === todoo) {
             todos[index].todo = req.body.todo;
+            todos[index].isCompleted = req.body.isCompleted;
         }
     });
     res.json(todos)
-
 });
 
-/*;
-console.log(todos)*/
 app.delete("/delete/todo/:todo", (req, res) => {
     const todoD = req.params.todo;
     console.log(todoD);
     todos.find((elem, index) => {
         if (elem.todo === todoD) {
             res.status(201);
-
             todos.splice(index, 1)
         }
     });
@@ -55,14 +50,13 @@ app.put("/complete/todo/:todo", (req, res) => {
             res.status(201);
             todos[index].isCompleted = true;
         }
-
     })
     res.json(todos);
 })
 
 
 app.get("/completed/todos", (req, res) => {
-    const arr = []
+    const arr = [];
     todos.forEach((element, index) => {
         res.status(202)
         if (element.isCompleted === true) {
@@ -71,12 +65,6 @@ app.get("/completed/todos", (req, res) => {
     })
     res.json(arr)
 })
-
-
-
-
-
-
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
